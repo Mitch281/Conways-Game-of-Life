@@ -26,6 +26,62 @@ class Puzzle:
         row_num = y_pos // INCREMENT
         self.grid[row_num][col_num] = 1
 
+    # Gets the status of all neighbours of a specific cell.
+    def get_neighbours(self, row_num, col_num):
+        neighbour_values = []
+
+        # Cell is in top left corner
+        if row_num == 0 and col_num == 0:
+            neighbour_values.append(self.grid[0][1])
+            neighbour_values.append(self.grid[1][1])
+            neighbour_values.append(self.grid[1][0])
+
+        # Cell is in bottom left corner
+        elif row_num == NUM_ROWS - 1 and col_num == 0:
+            neighbour_values.append(self.grid[NUM_ROWS - 2][0])
+            neighbour_values.append(self.grid[NUM_ROWS - 2][1])
+            neighbour_values.append(self.grid[NUM_ROWS - 1][1])
+
+        # Cell is in top right corner
+        elif row_num == 0 and col_num = NUM_COLUMNS - 1:
+            neighbour_values.append(self.grid[0][NUM_COLUMNS - 2])
+            neighbour_values.append(self.grid[1][NUM_COLUMNS - 2])
+            neighbour_values.append(self.grid[1][NUM_COLUMNS - 1])
+
+        # Cell is in bottom right corner
+        elif row_num == NUM_ROWS - 1 and col_num == NUM_COLUMNS - 1:
+            neighbour_values.append(self.grid[NUM_ROWS - 2][NUM_COLUMNS - 1])
+            neighbour_values.append(self.grid[NUM_ROWS - 2][NUM_COLUMNS - 2])
+            neighbour_values.append(self.grid[NUM_ROWS - 1][NUM_COLUMNS - 2])
+
+        # Cell is in a non corner position
+        else:
+            neighbour_values.append(self.grid[row_num - 1][col_num - 1])
+            neighbour_values.append(self.grid[row_num - 1][col_num])
+            neighbour_values.append(self.grid[row_num - 1][col_num + 1])
+            neighbour_values.append(self.grid[row_num][col_num + 1])
+            neighbour_values.append(self.grid[row_num + 1][col_num + 1])
+            neighbour_values.append(self.grid[row_num + 1][col_num])
+            neighbour_values.append(self.grid[row_num + 1][col_num - 1])
+            neighbour_values.append(self.grid[row_num][col_num - 1])
+
+
+    # Returns an array of all the indexes of the cells that are to become alive.
+    def get_births(self):
+        for row_num in range(NUM_ROWS):
+
+            # First, we check if there are any cells to be birthed in row 0. This is only possible if there are alive
+            # cells in row 1.
+            if row_num == 0:
+                if 1 in self.grid[row_num + 1]:
+                    for col_num in range(NUM_COLUMNS):
+                        if self.grid[row_num][col_num] == 0:
+
+
+    # The algorithm that runs the game.
+    def game_runner(self):
+        pass
+
 # Handles GUI
 class Screen:
     def __init__(self):
