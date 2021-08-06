@@ -27,7 +27,7 @@ class Puzzle:
         self.grid[row_num][col_num] = 1
 
     # Gets the status of all neighbours of a specific cell.
-    def get_neighbours(self, row_num, col_num):
+    def get_num_alive_neighbours(self, row_num, col_num):
         neighbour_values = []
 
         # Cell is in top left corner
@@ -43,7 +43,7 @@ class Puzzle:
             neighbour_values.append(self.grid[NUM_ROWS - 1][1])
 
         # Cell is in top right corner
-        elif row_num == 0 and col_num = NUM_COLUMNS - 1:
+        elif row_num == 0 and col_num == NUM_COLUMNS - 1:
             neighbour_values.append(self.grid[0][NUM_COLUMNS - 2])
             neighbour_values.append(self.grid[1][NUM_COLUMNS - 2])
             neighbour_values.append(self.grid[1][NUM_COLUMNS - 1])
@@ -65,22 +65,41 @@ class Puzzle:
             neighbour_values.append(self.grid[row_num + 1][col_num - 1])
             neighbour_values.append(self.grid[row_num][col_num - 1])
 
+        return neighbour_values.count(1)
 
-    # Returns an array of all the indexes of the cells that are to become alive.
-    def get_births(self):
+
+    # Returns an array of all the indexes of the cells that are to become alive and are to die.
+    def get_births_and_deaths(self):
+        births = []
+        deaths = []
         for row_num in range(NUM_ROWS):
-
-            # First, we check if there are any cells to be birthed in row 0. This is only possible if there are alive
-            # cells in row 1.
-            if row_num == 0:
-                if 1 in self.grid[row_num + 1]:
-                    for col_num in range(NUM_COLUMNS):
-                        if self.grid[row_num][col_num] == 0:
+            for col_num in range(NUM_COLUMNS):
+                if self.grid[row_num][col_num] == 0:
+                    if self.get_num_alive_neighbours(row_num, col_num) == 3:
+                        births.append((row_num, col_num))
+                elif self.grid[row_num][col_num] == 1:
+                    if (0 <= self.get_num_alive_neighbours(row_num, col_num) <= 1) or \
+                    (self.get_num_alive_neighbours(row_num, col_num) >= 4):
+                        deaths.append((row_num, col_num))
+        return births, deaths
 
 
     # The algorithm that runs the game.
-    def game_runner(self):
-        pass
+    def run_game(self):
+        births = self.get_births_and_deaths()[0]
+        deaths = self.get_births_and_deaths()[1]
+
+        # Give birth to the cells to be birthed.
+        for position in births:
+            row_num = position[0]
+            col_num = position[1]
+            self.grid[row_num][col_num] = 1
+
+        # Kill the cells to be killed.
+        for position in deaths:
+            row_num = position[0]
+            col_num = position[1]
+            self.grid[row_num][col_num] = 0
 
 # Handles GUI
 class Screen:
@@ -119,8 +138,10 @@ def main():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 click_position = pygame.mouse.get_pos()
                 puzzle.fill_grid(click_position)
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    puzzle.run_game()
 
         pygame.display.update()
-
 
 main()
