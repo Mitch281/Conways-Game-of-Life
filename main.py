@@ -30,42 +30,68 @@ class Puzzle:
     def get_num_alive_neighbours(self, row_num, col_num):
         neighbour_values = []
 
-        # Cell is in top left corner
-        if row_num == 0 and col_num == 0:
-            neighbour_values.append(self.grid[0][1])
-            neighbour_values.append(self.grid[1][1])
-            neighbour_values.append(self.grid[1][0])
+        # Cell is on top boundary
+        if row_num == 0:
+            # Cell is in top left corner
+            if col_num == 0:
+                neighbour_values.append(self.grid[0][1])
+                neighbour_values.append(self.grid[1][1])
+                neighbour_values.append(self.grid[1][0])
+            # Cell is in top right corner
+            elif col_num == NUM_COLUMNS - 1:
+                neighbour_values.append(self.grid[0][NUM_COLUMNS - 2])
+                neighbour_values.append(self.grid[1][NUM_COLUMNS - 2])
+                neighbour_values.append(self.grid[1][NUM_COLUMNS - 1])
+            else:
+                for i in range(-1, 2):
+                    neighbour_values.append(self.grid[1][col_num + i])
+                neighbour_values.append(self.grid[0][col_num - 1])
+                neighbour_values.append(self.grid[0][col_num + 1])
 
-        # Cell is in bottom left corner
-        elif row_num == NUM_ROWS - 1 and col_num == 0:
-            neighbour_values.append(self.grid[NUM_ROWS - 2][0])
-            neighbour_values.append(self.grid[NUM_ROWS - 2][1])
-            neighbour_values.append(self.grid[NUM_ROWS - 1][1])
+        # Cell is on right boundary
+        if col_num == NUM_COLUMNS - 1:
+            # Cell is in bottom right corner
+            if row_num == NUM_ROWS - 1:
+                neighbour_values.append(self.grid[NUM_ROWS - 2][NUM_COLUMNS - 1])
+                neighbour_values.append(self.grid[NUM_ROWS - 2][NUM_COLUMNS - 2])
+                neighbour_values.append(self.grid[NUM_ROWS - 1][NUM_COLUMNS - 2])
+            else:
+                for i in range(-1, 2):
+                    neighbour_values.append(self.grid[row_num + i][col_num - 1])
+                neighbour_values.append(self.grid[row_num - 1][col_num])
+                neighbour_values.append(self.grid[row_num + 1][col_num])
 
-        # Cell is in top right corner
-        elif row_num == 0 and col_num == NUM_COLUMNS - 1:
-            neighbour_values.append(self.grid[0][NUM_COLUMNS - 2])
-            neighbour_values.append(self.grid[1][NUM_COLUMNS - 2])
-            neighbour_values.append(self.grid[1][NUM_COLUMNS - 1])
+        # Cell is on bottom boundary.
+        if row_num == NUM_ROWS - 1:
+            # Cell is in bottom left corner
+            if col_num == 0:
+                neighbour_values.append(self.grid[NUM_ROWS - 2][0])
+                neighbour_values.append(self.grid[NUM_ROWS - 2][1])
+                neighbour_values.append(self.grid[NUM_ROWS - 1][1])
+            else:
+                for i in range(-1, 2):
+                    neighbour_values.append(self.grid[NUM_ROWS - 2][col_num + i])
+                neighbour_values.append(self.grid[row_num][col_num - 1])
+                neighbour_values.append(self.grid[row_num][col_num + 1])
 
-        # Cell is in bottom right corner
-        elif row_num == NUM_ROWS - 1 and col_num == NUM_COLUMNS - 1:
-            neighbour_values.append(self.grid[NUM_ROWS - 2][NUM_COLUMNS - 1])
-            neighbour_values.append(self.grid[NUM_ROWS - 2][NUM_COLUMNS - 2])
-            neighbour_values.append(self.grid[NUM_ROWS - 1][NUM_COLUMNS - 2])
+        # Cell is on left boundary
+        if col_num == 0:
+            for i in range(-1, 2):
+                neighbour_values.append(self.grid[row_num + i][col_num + 1])
+            neighbour_values.append(self.grid[row_num - 1][0])
+            neighbour_values.append(self.grid[row_num + 1][0])
 
-        # Cell is in a non corner position
+        # Cell is not on any boundary
         else:
-            neighbour_values.append(self.grid[row_num - 1][col_num - 1])
-            neighbour_values.append(self.grid[row_num - 1][col_num])
-            neighbour_values.append(self.grid[row_num - 1][col_num + 1])
-            neighbour_values.append(self.grid[row_num][col_num + 1])
-            neighbour_values.append(self.grid[row_num + 1][col_num + 1])
-            neighbour_values.append(self.grid[row_num + 1][col_num])
-            neighbour_values.append(self.grid[row_num + 1][col_num - 1])
-            neighbour_values.append(self.grid[row_num][col_num - 1])
+            for i in range(-1, 2):
+                neighbour_values.append(grid[row_num - 1][col_num + i])
+                neighbour_values.append(grid[row_num + 1][col_num + i])
+            neighbour_values.append(grid[row_num][col_num + 1])
+            neighbour_values.append(grid[row_num][col_num - 1])
 
         return neighbour_values.count(1)
+
+
 
 
     # Returns an array of all the indexes of the cells that are to become alive and are to die.
