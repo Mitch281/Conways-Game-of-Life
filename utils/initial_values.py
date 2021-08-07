@@ -1,0 +1,11 @@
+import numpy as np
+
+SCREEN_WIDTH = SCREEN_LENGTH = 640
+INCREMENT = 8
+NUM_ROWS = NUM_COLUMNS = int(SCREEN_LENGTH / INCREMENT)
+
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+GREEN = (0, 255, 0)
+
+grid = np.zeros((NUM_ROWS, NUM_COLUMNS))
