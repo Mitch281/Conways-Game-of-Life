@@ -168,6 +168,7 @@ puzzle = Puzzle()
 
 def main():
     running = True
+    num_times_enter_pressed = 0
     while running:
         screen.display.fill(BLACK)
         screen.draw_lines()
@@ -180,7 +181,10 @@ def main():
                 puzzle.fill_grid(click_position)
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
-                    puzzle.run_game()
+                    num_times_enter_pressed += 1
+
+        if num_times_enter_pressed % 2 == 1:
+            puzzle.run_game()
 
         pygame.display.update()
 
