@@ -12,12 +12,9 @@ def main():
     running = True
     num_times_enter_pressed = 0
     while running:
-        screen.display.fill(BLACK, (CONTROL_BAR_WIDTH, 0, GRID_WIDTH + CONTROL_BAR_WIDTH, GRID_LENGTH))
-        screen.display.fill(WHITE, (0, 0, CONTROL_BAR_WIDTH, CONTROL_BAR_LENGTH))
+        screen.display.fill(BLACK)
         screen.draw_lines()
         screen.render_alive_cells()
-        screen.render_instruction_font()
-        screen.render_controls()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
