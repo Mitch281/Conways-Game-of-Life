@@ -12,7 +12,8 @@ def main():
     running = True
     num_times_enter_pressed = 0
     while running:
-        screen.display.fill(BLACK)
+        screen.display.fill(BLACK, (0, 0, SCREEN_WIDTH, SCREEN_LENGTH))
+        screen.display.fill(ORANGE, (SCREEN_WIDTH, 0, CONTROL_PANEL_WIDTH, CONTROL_PANEL_LENGTH))
         screen.draw_lines()
         screen.render_alive_cells()
         for event in pygame.event.get():

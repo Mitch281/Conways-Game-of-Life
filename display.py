@@ -7,7 +7,7 @@ puzzle = Puzzle()
 # Handles GUI
 class Screen:
     def __init__(self):
-        self.display = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_LENGTH))
+        self.display = pygame.display.set_mode((SCREEN_WIDTH + CONTROL_PANEL_WIDTH, SCREEN_LENGTH))
         self.caption = pygame.display.set_caption("Conway's Game of Life")
 
     def draw_lines(self):
@@ -23,7 +23,7 @@ class Screen:
                     if puzzle.grid[row_num][col_num] == 1:
                         y_pos = row_num * INCREMENT
                         x_pos = col_num * INCREMENT
-                        pygame.draw.rect(self.display, GREEN,
+                        pygame.draw.rect(self.display, YELLOW,
                                          (x_pos, y_pos, INCREMENT, INCREMENT))
 
 screen = Screen()
