@@ -5,6 +5,7 @@ from utils.initial_values import *
 class Puzzle:
     def __init__(self):
         self.grid = grid
+        self.game_running = False
 
     # Changes the grid number to 1 if a square is clicked.
     def fill_grid(self, click_position):
