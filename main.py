@@ -11,6 +11,7 @@ puzzle = Puzzle()
 def main():
     running = True
     only_want_next_step = False
+    get_previous_step = False
     while running:
         screen.display.fill(BLACK, (0, 0, GRID_WIDTH, GRID_LENGTH))
         screen.display.fill(ORANGE, (GRID_WIDTH, 0, CONTROL_PANEL_WIDTH, CONTROL_PANEL_LENGTH))
@@ -29,9 +30,11 @@ def main():
                         puzzle.game_running = True
                     elif screen.get_control_clicked(click_position) == "stop":
                         puzzle.game_running = False
-                    if screen.get_control_clicked(click_position) == "next":
+                    elif screen.get_control_clicked(click_position) == "next":
                         puzzle.game_running = True
                         only_want_next_step = True
+                    elif screen.get_control_clicked(click_position) == "previous" and puzzle.step_count >= 1:
+                        get_previous_step = True
 
         if puzzle.game_running and only_want_next_step:
             puzzle.run_game()
@@ -40,6 +43,10 @@ def main():
 
         elif puzzle.game_running and not only_want_next_step:
             puzzle.run_game()
+
+        elif get_previous_step:
+            puzzle.go_back_one_step()
+            get_previous_step = False
 
         pygame.display.update()
 

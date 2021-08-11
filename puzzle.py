@@ -117,8 +117,8 @@ class Puzzle:
         deaths = self.get_births_and_deaths()[1]
 
         # Keep track of each step and the births and deaths recorded.
-        self.births_and_deaths[self.step_count] = (births, deaths)
         self.step_count += 1
+        self.births_and_deaths[self.step_count] = (births, deaths)
 
         # Give birth to the cells to be birthed.
         for position in births:
@@ -131,3 +131,18 @@ class Puzzle:
             row_num = position[0]
             col_num = position[1]
             self.grid[row_num][col_num] = 0
+
+    def go_back_one_step(self):
+        births_to_be_reversed = self.births_and_deaths[self.step_count][0]
+        deaths_to_be_reversed = self.births_and_deaths[self.step_count][1]
+        self.step_count -= 1
+
+        for position in births_to_be_reversed:
+            row_num = position[0]
+            col_num = position[1]
+            self.grid[row_num][col_num] = 0
+
+        for position in deaths_to_be_reversed:
+            row_num = position[0]
+            col_num = position[1]
+            self.grid[row_num][col_num] = 1
