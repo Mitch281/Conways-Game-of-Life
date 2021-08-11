@@ -19,6 +19,8 @@ GAP_BETWEEN_BUTTONS = 50
 
 PLAY_BUTTON = pygame.image.load("utils/play_button_resized.png")
 STOP_BUTTON = pygame.image.load("utils/stop_button_resized.png")
+NEXT_BUTTON = pygame.image.load("utils/next_button.png")
+PREVIOUS_BUTTON = pygame.image.load("utils/previous_button.png")
 
 # Get the render position of control text
 CONTROL_FONT_SIZE = 30
@@ -34,5 +36,13 @@ Y_POS_PLAY = Y_CONTROL_TEXT + CONTROL_TEXT.get_height() + GAP_BETWEEN_BUTTONS
 # Get the render position of stop button
 X_POS_STOP = GRID_WIDTH + CONTROL_PANEL_WIDTH // 2 - STOP_BUTTON.get_width() // 2
 Y_POS_STOP = Y_POS_PLAY + PLAY_BUTTON.get_height() + GAP_BETWEEN_BUTTONS
+
+# Get the render positions of next button
+X_POS_NEXT = GRID_WIDTH + CONTROL_PANEL_WIDTH // 2 - NEXT_BUTTON.get_width() // 2
+Y_POS_NEXT = Y_POS_STOP + STOP_BUTTON.get_height() + GAP_BETWEEN_BUTTONS
+
+# Get the render positions of previous button
+X_POS_PREVIOUS = GRID_WIDTH + CONTROL_PANEL_WIDTH // 2 - PREVIOUS_BUTTON.get_width() // 2
+Y_POS_PREVIOUS = Y_POS_NEXT + NEXT_BUTTON.get_height() + GAP_BETWEEN_BUTTONS
 
 grid = np.zeros((NUM_ROWS, NUM_COLUMNS))
