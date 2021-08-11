@@ -10,8 +10,7 @@ puzzle = Puzzle()
 
 def main():
     running = True
-    run_game = True
-    num_times_enter_pressed = 0
+    only_want_next_step = False
     while running:
         screen.display.fill(BLACK, (0, 0, GRID_WIDTH, GRID_LENGTH))
         screen.display.fill(ORANGE, (GRID_WIDTH, 0, CONTROL_PANEL_WIDTH, CONTROL_PANEL_LENGTH))
@@ -30,11 +29,16 @@ def main():
                         puzzle.game_running = True
                     elif screen.get_control_clicked(click_position) == "stop":
                         puzzle.game_running = False
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN:
-                    num_times_enter_pressed += 1
+                    if screen.get_control_clicked(click_position) == "next":
+                        puzzle.game_running = True
+                        only_want_next_step = True
 
-        if puzzle.game_running:
+        if puzzle.game_running and only_want_next_step:
+            puzzle.run_game()
+            puzzle.game_running = False
+            only_want_next_step = False
+
+        elif puzzle.game_running and not only_want_next_step:
             puzzle.run_game()
 
         pygame.display.update()

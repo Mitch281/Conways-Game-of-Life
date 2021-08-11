@@ -6,6 +6,8 @@ class Puzzle:
     def __init__(self):
         self.grid = grid
         self.game_running = False
+        self.births_and_deaths = {}
+        self.step_count = 0
 
     # Changes the grid number to 1 if a square is clicked.
     def fill_grid(self, click_position):
@@ -113,6 +115,10 @@ class Puzzle:
     def run_game(self):
         births = self.get_births_and_deaths()[0]
         deaths = self.get_births_and_deaths()[1]
+
+        # Keep track of each step and the births and deaths recorded.
+        self.births_and_deaths[self.step_count] = (births, deaths)
+        self.step_count += 1
 
         # Give birth to the cells to be birthed.
         for position in births:
