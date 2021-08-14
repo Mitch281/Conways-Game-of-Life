@@ -14,6 +14,10 @@ def main():
     only_want_next_step = False
     get_previous_step = False
     mouse_being_clicked = False
+
+    # Number of times the mouse is either clicked or has a click released.
+    num_times_click = 0
+
     while running:
         screen.display.fill(BLACK, (0, 0, GRID_WIDTH, GRID_LENGTH))
         screen.display.fill(ORANGE, (GRID_WIDTH, 0, CONTROL_PANEL_WIDTH, CONTROL_PANEL_LENGTH))
@@ -25,10 +29,9 @@ def main():
                 running = False
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_being_clicked = True
+                num_times_click += 1
                 click_position = pygame.mouse.get_pos()
-                if screen.click_on_grid(click_position):
-                    puzzle.fill_grid(click_position)
-                else:
+                if not screen.click_on_grid(click_position):
                     if screen.get_control_clicked(click_position) == "play":
                         puzzle.game_running = True
                     elif screen.get_control_clicked(click_position) == "stop":
@@ -41,6 +44,11 @@ def main():
 
             if event.type == pygame.MOUSEBUTTONUP:
                 mouse_being_clicked = False
+                num_times_click += 1
+
+        if num_times_click >= 1 and num_times_click % 2 == 0:
+            if screen.click_on_grid(click_position):
+                puzzle.fill_grid(click_position)
 
         # Highlight control buttons or cells if cursor is hovering over them.
         cursor_position = pygame.mouse.get_pos()
