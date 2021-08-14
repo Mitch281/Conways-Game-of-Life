@@ -42,10 +42,11 @@ def main():
             if event.type == pygame.MOUSEBUTTONUP:
                 mouse_being_clicked = False
 
-        # Highlight control buttons if hovered over.
+        # Highlight control buttons or cells if cursor is hovering over them.
         cursor_position = pygame.mouse.get_pos()
         if not mouse_being_clicked:
             screen.highlight_control(cursor_position)
+            screen.highlight_cell(cursor_position)
 
         if puzzle.game_running and only_want_next_step:
             puzzle.run_game()

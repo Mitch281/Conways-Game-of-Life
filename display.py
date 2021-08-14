@@ -28,6 +28,14 @@ class Screen:
                         pygame.draw.rect(self.display, YELLOW,
                                          (x_pos, y_pos, INCREMENT, INCREMENT))
 
+    def highlight_cell(self, cursor_position):
+        if self.click_on_grid(cursor_position):
+            row_num = cursor_position[0] // INCREMENT
+            col_num = cursor_position[1] // INCREMENT
+            y_pos = col_num * INCREMENT
+            x_pos = row_num * INCREMENT
+            pygame.draw.rect(self.display, YELLOW, (x_pos, y_pos, INCREMENT, INCREMENT), 2)
+
     # Detects if the click was on the grid or not.
     def click_on_grid(self, click_position):
         x_pos = click_position[0]
