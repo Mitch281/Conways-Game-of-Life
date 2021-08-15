@@ -1,5 +1,5 @@
 from initial_values import *
-
+import random
 
 # Handles logic and algorithm.
 class Puzzle:
@@ -145,3 +145,15 @@ class Puzzle:
             row_num = position[0]
             col_num = position[1]
             self.grid[row_num][col_num] = 1
+
+    def generate_random_board(self):
+        for row_num in range(NUM_ROWS):
+            num_alive_cells_per_row = random.randint(0, NUM_COLUMNS)
+            alive_cells_in_row = random.sample(range(0, NUM_COLUMNS), num_alive_cells_per_row)
+            for col_num in alive_cells_in_row:
+                self.grid[row_num][col_num] = 1
+
+    def reset_grid(self):
+        for row_num in range(NUM_ROWS):
+            for col_num in range(NUM_COLUMNS):
+                self.grid[row_num][col_num] = 0

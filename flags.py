@@ -5,6 +5,7 @@ class Flags:
         self.only_want_next_step = False
         self.get_previous_step = False
         self.mouse_being_clicked = False
+        self.generate_random_board = False
 
         # Number of times mouse is clicked or relased.
         self.num_times_click = 0
