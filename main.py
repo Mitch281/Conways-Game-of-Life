@@ -1,5 +1,4 @@
-import pygame
-from utils.initial_values import *
+from initial_values import *
 from puzzle import Puzzle
 from display import Screen
 from flags import Flags
@@ -27,14 +26,14 @@ def main():
                 flags.num_times_click += 1
                 click_position = pygame.mouse.get_pos()
                 if not screen.click_on_grid(click_position):
-                    if screen.get_control_clicked(click_position) == "play":
+                    if screen.cursor_on_play_button(click_position):
                         flags.game_running = True
-                    elif screen.get_control_clicked(click_position) == "stop":
+                    elif screen.cursor_on_stop_button(click_position):
                         flags.game_running = False
-                    elif screen.get_control_clicked(click_position) == "next":
+                    elif screen.cursor_on_next_button(click_position):
                         flags.game_running = True
                         flags.only_want_next_step = True
-                    elif screen.get_control_clicked(click_position) == "previous" and puzzle.step_count >= 1:
+                    elif screen.cursor_on_previous_button(click_position) and puzzle.step_count >= 1:
                         flags.get_previous_step = True
 
             if event.type == pygame.MOUSEBUTTONUP:

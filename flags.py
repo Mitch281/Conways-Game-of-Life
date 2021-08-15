@@ -1,5 +1,5 @@
 # Class to handle all of the flags involved in button animation.
-class Flags():
+class Flags:
     def __init__(self):
         self.game_running = False
         self.only_want_next_step = False

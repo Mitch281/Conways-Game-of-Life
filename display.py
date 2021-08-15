@@ -1,16 +1,23 @@
-from pygame import font
-from utils.initial_values import *
+from initial_values import *
 from puzzle import Puzzle
+from control_positions import ControlPositions
 
 font.init()
 puzzle = Puzzle()
+control_positions = ControlPositions()
 
 
 # Handles GUI
 class Screen:
     def __init__(self):
+        control_positions.set_all_control_positions()
         self.display = pygame.display.set_mode((GRID_WIDTH + CONTROL_PANEL_WIDTH, GRID_LENGTH))
         self.caption = pygame.display.set_caption("Conway's Game of Life")
+        self.x_control_text, self.y_control_text = control_positions.x_control_text, control_positions.y_control_text
+        self.x_play, self.y_play = control_positions.x_play, control_positions.y_play
+        self.x_stop, self.y_stop = control_positions.x_stop, control_positions.y_stop
+        self.x_next, self.y_next = control_positions.x_next, control_positions.y_next
+        self.x_previous, self.y_previous = control_positions.x_previous, control_positions.y_previous
 
     def draw_lines(self):
         for i in range(0, GRID_LENGTH, INCREMENT):
@@ -43,44 +50,59 @@ class Screen:
             return True
         return False
 
-    # Detects the control button clicked.
-    def get_control_clicked(self, click_position):
-        x_pos = click_position[0]
-        y_pos = click_position[1]
-        if X_POS_PLAY <= x_pos <= X_POS_PLAY + PLAY_BUTTON.get_width():
-            if Y_POS_PLAY <= y_pos <= Y_POS_PLAY + PLAY_BUTTON.get_height():
-                return "play"
-            elif Y_POS_STOP <= y_pos <= Y_POS_STOP + STOP_BUTTON.get_height():
-                return "stop"
-            elif Y_POS_NEXT <= y_pos <= Y_POS_NEXT + NEXT_BUTTON.get_height():
-                return "next"
-            elif Y_POS_PREVIOUS <= y_pos <= Y_POS_PREVIOUS + PREVIOUS_BUTTON.get_height():
-                return "previous"
-
-    def highlight_control(self, cursor_position):
+    def cursor_on_play_button(self, cursor_position):
         x_pos = cursor_position[0]
         y_pos = cursor_position[1]
-        if X_POS_PLAY <= x_pos <= X_POS_PLAY + CONTROL_PANEL_WIDTH:
-            if Y_POS_PLAY <= y_pos <= Y_POS_PLAY + PLAY_BUTTON.get_height():
-                pygame.draw.rect(self.display, GREEN, (
-                    X_POS_PLAY, Y_POS_PLAY, PLAY_BUTTON.get_width(), PLAY_BUTTON.get_height()), 2)
-            elif Y_POS_STOP <= y_pos <= Y_POS_STOP + STOP_BUTTON.get_height():
-                pygame.draw.rect(self.display, GREEN,
-                                 (X_POS_STOP, Y_POS_STOP, STOP_BUTTON.get_width(), STOP_BUTTON.get_height()), 2)
-            elif Y_POS_NEXT <= y_pos <= Y_POS_NEXT + NEXT_BUTTON.get_height():
-                pygame.draw.rect(self.display, GREEN,
-                                 (X_POS_NEXT, Y_POS_NEXT, NEXT_BUTTON.get_width(), NEXT_BUTTON.get_height()), 2)
-            elif Y_POS_PREVIOUS <= y_pos <= Y_POS_PREVIOUS + PREVIOUS_BUTTON.get_height():
-                pygame.draw.rect(self.display, GREEN,
-                                 (X_POS_PREVIOUS, Y_POS_PREVIOUS, PREVIOUS_BUTTON.get_width(),
-                                  PREVIOUS_BUTTON.get_height()), 2)
+        if self.x_play <= x_pos <= self.x_play + BUTTON_WIDTH:
+            if self.y_play <= y_pos <= self.y_play + BUTTON_HEIGHT:
+                return True
+        return False
+
+    def cursor_on_stop_button(self, cursor_position):
+        x_pos = cursor_position[0]
+        y_pos = cursor_position[1]
+        if self.x_stop <= x_pos <= self.x_stop + BUTTON_WIDTH:
+            if self.y_stop <= y_pos <= self.y_stop + BUTTON_HEIGHT:
+                return True
+        return False
+
+    def cursor_on_next_button(self, cursor_position):
+        x_pos = cursor_position[0]
+        y_pos = cursor_position[1]
+        if self.x_next <= x_pos <= self.x_next + BUTTON_WIDTH:
+            if self.y_next <= y_pos <= self.y_next + BUTTON_HEIGHT:
+                return True
+        return False
+
+    def cursor_on_previous_button(self, cursor_position):
+        x_pos = cursor_position[0]
+        y_pos = cursor_position[1]
+        if self.x_previous <= x_pos <= self.x_previous + BUTTON_WIDTH:
+            if self.y_previous <= y_pos <= self.y_previous + BUTTON_HEIGHT:
+                return True
+        return False
+
+    def highlight_control(self, cursor_position):
+        if self.cursor_on_play_button(cursor_position):
+            pygame.draw.rect(self.display, GREEN, (
+                self.x_play, self.y_play, BUTTON_WIDTH, BUTTON_HEIGHT), 2)
+        elif self.cursor_on_stop_button(cursor_position):
+            pygame.draw.rect(self.display, GREEN,
+                             (self.x_stop, self.y_stop, BUTTON_WIDTH, BUTTON_HEIGHT), 2)
+        elif self.cursor_on_next_button(cursor_position):
+            pygame.draw.rect(self.display, GREEN,
+                             (self.x_next, self.y_next, BUTTON_WIDTH, BUTTON_HEIGHT), 2)
+        elif self.cursor_on_previous_button(cursor_position):
+            pygame.draw.rect(self.display, GREEN,
+                             (self.x_previous,self.y_previous, BUTTON_WIDTH,
+                              BUTTON_HEIGHT), 2)
 
     def render_controls_panel(self):
-        self.display.blit(CONTROL_TEXT, (X_CONTROL_TEXT, Y_CONTROL_TEXT))
-        self.display.blit(PLAY_BUTTON, (X_POS_PLAY, Y_POS_PLAY))
-        self.display.blit(STOP_BUTTON, (X_POS_STOP, Y_POS_STOP))
-        self.display.blit(NEXT_BUTTON, (X_POS_NEXT, Y_POS_NEXT))
-        self.display.blit(PREVIOUS_BUTTON, (X_POS_PREVIOUS, Y_POS_PREVIOUS))
+        self.display.blit(CONTROL_TEXT, (self.x_control_text, self.y_control_text))
+        self.display.blit(PLAY_BUTTON, (self.x_play, self.y_play))
+        self.display.blit(STOP_BUTTON, (self.x_stop, self.y_stop))
+        self.display.blit(NEXT_BUTTON, (self.x_next, self.y_next))
+        self.display.blit(PREVIOUS_BUTTON, (self.x_previous, self.y_previous))
 
 
 screen = Screen()

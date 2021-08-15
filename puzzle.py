@@ -1,4 +1,4 @@
-from utils.initial_values import *
+from initial_values import *
 
 
 # Handles logic and algorithm.
