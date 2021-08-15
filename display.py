@@ -93,8 +93,7 @@ class Screen:
             pygame.draw.rect(self.display, GREEN,
                              (self.x_next, self.y_next, BUTTON_WIDTH, BUTTON_HEIGHT), 2)
         elif self.cursor_on_previous_button(cursor_position):
-            pygame.draw.rect(self.display, GREEN,
-                             (self.x_previous,self.y_previous, BUTTON_WIDTH,
+            pygame.draw.rect(self.display, GREEN,(self.x_previous, self.y_previous, BUTTON_WIDTH,
                               BUTTON_HEIGHT), 2)
 
     def render_controls_panel(self):

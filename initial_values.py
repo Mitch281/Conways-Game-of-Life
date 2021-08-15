@@ -15,7 +15,7 @@ GRID_WIDTH = GRID_LENGTH = 640
 INCREMENT = 8
 NUM_ROWS = NUM_COLUMNS = GRID_LENGTH // INCREMENT
 CONTROL_PANEL_WIDTH = 240
-CONTROL_PANEL_LENGTH = GRID_LENGTH
+CONTROL_PANEL_HEIGHT = GRID_LENGTH
 GAP_BETWEEN_BUTTONS = 50
 
 PLAY_BUTTON = pygame.image.load("images/play_button_resized.png")
@@ -29,13 +29,6 @@ CONTROL_FONT_SIZE = 30
 CONTROL_FONT = pygame.font.SysFont("cambria", CONTROL_FONT_SIZE)
 CONTROL_TEXT = CONTROL_FONT.render("Controls", 1, BLUE)
 CONTROL_TEXT_WIDTH = CONTROL_TEXT.get_width()
+CONTROL_TEXT_HEIGHT = CONTROL_TEXT.get_height()
 
 grid = np.zeros((NUM_ROWS, NUM_COLUMNS))
-for i in range(NUM_ROWS):
-    for j in range(NUM_COLUMNS):
-        if i % 2 == 0 and j % 3 == 0:
-            grid[i][j] = 1
-        if i % 2 == 1 and j % 10 == 1:
-            grid[i][j] = 1
-        if i % 2 == 0 and j % 4 == 0:
-            grid[i][j] = 1

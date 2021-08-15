@@ -16,7 +16,7 @@ class ControlPositions:
     def set_play_button_pos(self):
         self.set_control_text_pos()
         self.x_play = GRID_WIDTH + CONTROL_PANEL_WIDTH // 2 - BUTTON_WIDTH // 2
-        self.y_play = self.y_control_text + CONTROL_TEXT.get_height() + GAP_BETWEEN_BUTTONS
+        self.y_play = self.y_control_text + CONTROL_TEXT_HEIGHT + GAP_BETWEEN_BUTTONS
 
     def set_stop_button_pos(self):
         self.set_play_button_pos()

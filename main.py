@@ -14,7 +14,7 @@ def main():
     running = True
     while running:
         screen.display.fill(BLACK, (0, 0, GRID_WIDTH, GRID_LENGTH))
-        screen.display.fill(ORANGE, (GRID_WIDTH, 0, CONTROL_PANEL_WIDTH, CONTROL_PANEL_LENGTH))
+        screen.display.fill(ORANGE, (GRID_WIDTH, 0, CONTROL_PANEL_WIDTH, CONTROL_PANEL_HEIGHT))
         screen.draw_lines()
         screen.render_alive_cells()
         screen.render_controls_panel()
