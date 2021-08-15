@@ -1,11 +1,10 @@
-from utils.initial_values import *
+from initial_values import *
 
 
 # Handles logic and algorithm.
 class Puzzle:
     def __init__(self):
         self.grid = grid
-        self.game_running = False
         self.births_and_deaths = {}
         self.step_count = 0
 
