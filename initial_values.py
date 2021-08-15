@@ -16,12 +16,13 @@ INCREMENT = 8
 NUM_ROWS = NUM_COLUMNS = GRID_LENGTH // INCREMENT
 CONTROL_PANEL_WIDTH = 240
 CONTROL_PANEL_HEIGHT = GRID_LENGTH
-GAP_BETWEEN_BUTTONS = 50
+GAP_BETWEEN_BUTTONS = 35
 
 PLAY_BUTTON = pygame.image.load("images/play_button_resized.png")
 STOP_BUTTON = pygame.image.load("images/stop_button_resized.png")
 NEXT_BUTTON = pygame.image.load("images/next_button.png")
 PREVIOUS_BUTTON = pygame.image.load("images/previous_button.png")
+RANDOM_BUTTON = pygame.image.load("images/random_button.png")
 BUTTON_WIDTH = PLAY_BUTTON.get_width()
 BUTTON_HEIGHT = PLAY_BUTTON.get_height()
 
