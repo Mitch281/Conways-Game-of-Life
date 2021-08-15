@@ -6,5 +6,5 @@ class Flags:
         self.get_previous_step = False
         self.mouse_being_clicked = False
 
-        # Number of times mouse is clicked or relased.
+        # Number of times mouse is clicked or released.
         self.num_times_click = 0

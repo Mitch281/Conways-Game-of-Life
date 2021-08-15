@@ -11,8 +11,8 @@ control_positions = ControlPositions()
 class Screen:
     def __init__(self):
         control_positions.set_all_control_positions()
+        pygame.display.set_caption("Conway's Game of Life")
         self.display = pygame.display.set_mode((GRID_WIDTH + CONTROL_PANEL_WIDTH, GRID_LENGTH))
-        self.caption = pygame.display.set_caption("Conway's Game of Life")
         self.x_control_text, self.y_control_text = control_positions.x_control_text, control_positions.y_control_text
         self.x_play, self.y_play = control_positions.x_play, control_positions.y_play
         self.x_stop, self.y_stop = control_positions.x_stop, control_positions.y_stop

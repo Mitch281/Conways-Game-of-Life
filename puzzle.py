@@ -1,6 +1,7 @@
 from initial_values import *
 import random
 
+
 # Handles logic and algorithm.
 class Puzzle:
     def __init__(self):
