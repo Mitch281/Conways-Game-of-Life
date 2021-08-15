@@ -47,3 +47,11 @@ X_POS_PREVIOUS = GRID_WIDTH + CONTROL_PANEL_WIDTH // 2 - PREVIOUS_BUTTON.get_wid
 Y_POS_PREVIOUS = Y_POS_NEXT + NEXT_BUTTON.get_height() + GAP_BETWEEN_BUTTONS
 
 grid = np.zeros((NUM_ROWS, NUM_COLUMNS))
+for i in range(NUM_ROWS):
+    for j in range(NUM_COLUMNS):
+        if i % 2 == 0 and j % 3 == 0:
+            grid[i][j] = 1
+        if i % 2 == 1 and j % 10 == 1:
+            grid[i][j] = 1
+        if i % 2 == 0 and j % 4 == 0:
+            grid[i][j] = 1
