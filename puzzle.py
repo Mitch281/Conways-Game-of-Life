@@ -2,15 +2,28 @@ from initial_values import *
 import random
 
 
-# Handles logic and algorithm.
 class Puzzle:
+    """
+    Class that handles the logic of the puzzle
+    """
     def __init__(self):
+        """
+        Initialise the object
+        :param self.grid: matrix of 1's and 0's. 1 means cell is alive, 0 means cell is dead (list)
+        :param self.births_and_deaths: a dictionary containing each step number of the algorithm, and the corresponding
+        cells that were birthed and died in the step (dict)
+        :param self.step_count: counts the step the algorithm is on (starting at 0) (int)
+        """
         self.grid = grid
         self.births_and_deaths = {}
         self.step_count = 0
 
-    # Changes the grid number to 1 if a square is clicked.
     def fill_grid(self, click_position):
+        """
+        makes a cell alive if clicked on
+        :param click_position: the x, y coordinates of the click
+        :return: None
+        """
         x_pos = click_position[0]
         y_pos = click_position[1]
         col_num = x_pos // INCREMENT
@@ -19,12 +32,24 @@ class Puzzle:
 
     # Returns true if a cell is not on a boundary, false otherwise.
     def not_on_boundary(self, row_num, col_num):
+        """
+        checks if a certain cell is on the boundary of the grid
+        :param row_num: the row number that the cell belongs to
+        :param col_num: the column number that the cell belongs to
+        :return: bool
+        """
         if 1 <= row_num <= NUM_ROWS - 2 and 1 <= col_num <= NUM_COLUMNS - 2:
             return True
         return False
 
     # Gets the status of all neighbours of a specific cell.
     def get_num_alive_neighbours(self, row_num, col_num):
+        """
+        gets the number of alive numbers of a cell
+        :param row_num: the row number that the cell belongs to
+        :param col_num: the column number that the cell belongs to
+        :return: int
+        """
         neighbour_values = []
 
         # Ensures that the cell is not on a boundary.
@@ -92,6 +117,10 @@ class Puzzle:
 
     # Returns an array of all the indexes of the cells that are to become alive and are to die.
     def get_births_and_deaths(self):
+        """
+        gives all the cells (there indexes) that are to be birthed and die
+        :return: tuple
+        """
         births = []
         deaths = []
         for row_num in range(NUM_ROWS):
@@ -111,8 +140,11 @@ class Puzzle:
 
         return births, deaths
 
-    # The algorithm that runs the game.
     def run_game(self):
+        """
+        performs the births and deaths
+        :return: None
+        """
         births = self.get_births_and_deaths()[0]
         deaths = self.get_births_and_deaths()[1]
 
@@ -133,6 +165,10 @@ class Puzzle:
             self.grid[row_num][col_num] = 0
 
     def go_back_one_step(self):
+        """
+        undoes one step of algorithm
+        :return: None
+        """
         births_to_be_reversed = self.births_and_deaths[self.step_count][0]
         deaths_to_be_reversed = self.births_and_deaths[self.step_count][1]
         self.step_count -= 1
@@ -148,6 +184,10 @@ class Puzzle:
             self.grid[row_num][col_num] = 1
 
     def generate_random_board(self):
+        """
+        generates a random board
+        :return: None
+        """
         for row_num in range(NUM_ROWS):
             num_alive_cells_per_row = random.randint(0, NUM_COLUMNS)
             alive_cells_in_row = random.sample(range(0, NUM_COLUMNS), num_alive_cells_per_row)
@@ -155,6 +195,10 @@ class Puzzle:
                 self.grid[row_num][col_num] = 1
 
     def reset_grid(self):
+        """
+        resets the grid (all cells dead)
+        :return: None
+        """
         for row_num in range(NUM_ROWS):
             for col_num in range(NUM_COLUMNS):
                 self.grid[row_num][col_num] = 0
