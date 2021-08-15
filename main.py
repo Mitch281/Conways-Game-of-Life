@@ -37,10 +37,10 @@ def main():
                         if not flags.game_running:
                             flags.get_previous_step = True
                     elif screen.cursor_on_random_button(click_position) and not flags.game_running:
-                        flags.generate_random_board = True
-                        # Reset current grid
                         puzzle.reset_grid()
-
+                        puzzle.generate_random_board()
+                    elif screen.cursor_on_reset_button(click_position) and not flags.game_running:
+                        puzzle.reset_grid()
 
             if event.type == pygame.MOUSEBUTTONUP:
                 flags.mouse_being_clicked = False
@@ -68,10 +68,6 @@ def main():
         elif flags.get_previous_step:
             puzzle.go_back_one_step()
             flags.get_previous_step = False
-
-        if flags.generate_random_board:
-            puzzle.generate_random_board()
-            flags.generate_random_board = False
 
         pygame.display.update()
 

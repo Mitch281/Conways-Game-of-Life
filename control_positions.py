@@ -9,6 +9,7 @@ class ControlPositions:
         self.x_next, self.y_next = 0, 0
         self.x_previous, self.y_previous = 0, 0
         self.x_random, self.y_random = 0, 0
+        self.x_reset, self.y_reset = 0, 0
 
     def set_control_text_pos(self):
         self.x_control_text = GRID_WIDTH + CONTROL_PANEL_WIDTH // 2 - CONTROL_TEXT_WIDTH // 2
@@ -39,6 +40,11 @@ class ControlPositions:
         self.x_random = GRID_WIDTH + CONTROL_PANEL_WIDTH // 2 - BUTTON_WIDTH // 2
         self.y_random = self.y_previous + BUTTON_HEIGHT + GAP_BETWEEN_BUTTONS
 
+    def set_reset_button_pos(self):
+        self.set_random_button_pos()
+        self.x_reset = GRID_WIDTH + CONTROL_PANEL_WIDTH // 2 - BUTTON_WIDTH // 2
+        self.y_reset = self.y_random + BUTTON_HEIGHT + GAP_BETWEEN_BUTTONS
+
     def set_all_control_positions(self):
         self.set_control_text_pos()
         self.set_play_button_pos()
@@ -46,3 +52,4 @@ class ControlPositions:
         self.set_next_button_pos()
         self.set_previous_button_pos()
         self.set_random_button_pos()
+        self.set_reset_button_pos()

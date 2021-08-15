@@ -19,6 +19,7 @@ class Screen:
         self.x_next, self.y_next = control_positions.x_next, control_positions.y_next
         self.x_previous, self.y_previous = control_positions.x_previous, control_positions.y_previous
         self.x_random, self.y_random = control_positions.x_random, control_positions.y_random
+        self.x_reset, self.y_reset = control_positions.x_reset, control_positions.y_reset
 
     def draw_lines(self):
         for i in range(0, GRID_LENGTH, INCREMENT):
@@ -91,6 +92,14 @@ class Screen:
                 return True
         return False
 
+    def cursor_on_reset_button(self, cursor_position):
+        x_pos = cursor_position[0]
+        y_pos = cursor_position[1]
+        if self.x_reset <= x_pos <= self.x_reset + BUTTON_WIDTH:
+            if self.y_reset <= y_pos <= self.y_reset + BUTTON_HEIGHT:
+                return True
+        return False
+
     def highlight_control(self, cursor_position):
         if self.cursor_on_play_button(cursor_position):
             pygame.draw.rect(self.display, GREEN, (
@@ -104,10 +113,11 @@ class Screen:
         elif self.cursor_on_previous_button(cursor_position):
             pygame.draw.rect(self.display, GREEN, (self.x_previous, self.y_previous, BUTTON_WIDTH,
                                                    BUTTON_HEIGHT), 2)
-
         elif self.cursor_on_random_button(cursor_position):
             pygame.draw.rect(self.display, GREEN, (self.x_random, self.y_random, BUTTON_WIDTH,
                                                    BUTTON_HEIGHT), 2)
+        elif self.cursor_on_reset_button(cursor_position):
+            pygame.draw.rect(self.display, GREEN, (self.x_reset, self.y_reset, BUTTON_WIDTH, BUTTON_HEIGHT), 2)
 
     def render_controls_panel(self):
         self.display.blit(CONTROL_TEXT, (self.x_control_text, self.y_control_text))
@@ -116,6 +126,7 @@ class Screen:
         self.display.blit(NEXT_BUTTON, (self.x_next, self.y_next))
         self.display.blit(PREVIOUS_BUTTON, (self.x_previous, self.y_previous))
         self.display.blit(RANDOM_BUTTON, (self.x_random, self.y_random))
+        self.display.blit(RESET_BUTTON, (self.x_reset, self.y_reset))
 
 
 screen = Screen()
