@@ -1,3 +1,5 @@
+import pygame
+
 from initial_values import *
 from puzzle import Puzzle
 from display import Screen
@@ -18,6 +20,8 @@ def main():
         screen.draw_lines()
         screen.render_alive_cells()
         screen.render_controls_panel()
+        keys_pressed = pygame.key.get_pressed()
+        mouse_pressed = pygame.mouse.get_pressed()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -45,6 +49,11 @@ def main():
             if event.type == pygame.MOUSEBUTTONUP:
                 flags.mouse_being_clicked = False
                 flags.num_times_click += 1
+
+        # Fills grid based on cursor position when control button and mouse both pressed at same time.
+        if keys_pressed[pygame.K_LCTRL] and mouse_pressed[0]:
+            click_position = pygame.mouse.get_pos()
+            puzzle.fill_grid(click_position)
 
         # Fill grid when mouse button click on grid is released.
         if flags.num_times_click >= 1 and flags.num_times_click % 2 == 0:
