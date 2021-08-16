@@ -1,5 +1,7 @@
-# Class to handle all of the flags involved in button animation.
 class Flags:
+    """
+    Handles flags that are used to create button animation when buttons are clicked
+    """
     def __init__(self):
         """
         Initialise the object

@@ -7,8 +7,10 @@ puzzle = Puzzle()
 control_positions = ControlPositions()
 
 
-# Handles GUI
 class Screen:
+    """
+    Class to handle GUI
+    """
     def __init__(self):
         """
         Initialise the object
@@ -40,7 +42,6 @@ class Screen:
             pygame.draw.line(self.display, WHITE, (i, 0), (i, GRID_LENGTH))
             pygame.draw.line(self.display, WHITE, (0, i), (GRID_WIDTH, i))
 
-    # Renders a green box on top of the cells that are alive.
     def render_alive_cells(self):
         """
         renders the cells that are alive
@@ -68,7 +69,6 @@ class Screen:
             x_pos = row_num * INCREMENT
             pygame.draw.rect(self.display, YELLOW, (x_pos, y_pos, INCREMENT, INCREMENT), 2)
 
-    # Detects if the click was on the grid or not.
     def click_on_grid(self, click_position):
         """
         detects if a mouse click was in the grid or not
