@@ -7,7 +7,7 @@ puzzle = Puzzle()
 control_positions = ControlPositions()
 
 
-class Screen:
+class Screen(ControlPositions):
     """
     Class to handle GUI
     """
@@ -15,23 +15,11 @@ class Screen:
         """
         Initialise the object
         :param self.display: the screen (pygame.Surface)
-        :param (x_play, y_play): x and y render positions for play button (int, int)
-        :param (x_stop, y_stop): x and y render positions for stop button (int, int)
-        :param (x_next, y_next): x and y render positions for next button (int, int)
-        :param (x_previous, y_previous): x and y render positions for previous button (int, int)
-        :param (x_random, y_random): x and y render positions for random button (int, int)
-        :param (x_reset, y_reset): x and y render positions for reset button (int, int)
         """
-        control_positions.set_all_control_positions()
         pygame.display.set_caption("Conway's Game of Life")
         self.display = pygame.display.set_mode((GRID_WIDTH + CONTROL_PANEL_WIDTH, GRID_LENGTH))
-        self.x_control_text, self.y_control_text = control_positions.x_control_text, control_positions.y_control_text
-        self.x_play, self.y_play = control_positions.x_play, control_positions.y_play
-        self.x_stop, self.y_stop = control_positions.x_stop, control_positions.y_stop
-        self.x_next, self.y_next = control_positions.x_next, control_positions.y_next
-        self.x_previous, self.y_previous = control_positions.x_previous, control_positions.y_previous
-        self.x_random, self.y_random = control_positions.x_random, control_positions.y_random
-        self.x_reset, self.y_reset = control_positions.x_reset, control_positions.y_reset
+        ControlPositions.__init__(self)
+        self.set_all_control_positions()
 
     def draw_lines(self):
         """
