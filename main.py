@@ -59,6 +59,7 @@ def main():
             click_position = pygame.mouse.get_pos()
             puzzle.fill_grid(click_position)
 
+        # Highlights draw mode button while draw mode is on.
         if flags.draw_mode_on:
             screen.highlight_draw_mode_button()
 

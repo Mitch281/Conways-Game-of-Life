@@ -177,6 +177,8 @@ class Screen(ControlPositions):
                                                    BUTTON_HEIGHT), 2)
         elif self.cursor_on_reset_button(cursor_position):
             pygame.draw.rect(self.display, GREEN, (self.x_reset, self.y_reset, BUTTON_WIDTH, BUTTON_HEIGHT), 2)
+        elif self.cursor_on_draw_mode_button(cursor_position):
+            pygame.draw.rect(self.display, GREEN, (self.x_draw_mode, self.y_draw_mode, BUTTON_WIDTH, BUTTON_HEIGHT), 2)
 
     def highlight_draw_mode_button(self):
         """
