@@ -18,17 +18,25 @@ class Puzzle:
         self.births_and_deaths = {}
         self.step_count = 0
 
+    def click_in_bounds(self, click_position):
+        x_pos = click_position[0]
+        y_pos = click_position[1]
+        if 0 <= x_pos <= GRID_WIDTH and 0 <= y_pos <= GRID_LENGTH:
+            return True
+        return False
+
     def fill_grid(self, click_position):
         """
         makes a cell alive if clicked on
         :param click_position: the x, y coordinates of the click
         :return: None
         """
-        x_pos = click_position[0]
-        y_pos = click_position[1]
-        col_num = x_pos // INCREMENT
-        row_num = y_pos // INCREMENT
-        self.grid[row_num][col_num] = 1
+        if self.click_in_bounds(click_position):
+            x_pos = click_position[0]
+            y_pos = click_position[1]
+            col_num = x_pos // INCREMENT
+            row_num = y_pos // INCREMENT
+            self.grid[row_num][col_num] = 1
 
     # Returns true if a cell is not on a boundary, false otherwise.
     def not_on_boundary(self, row_num, col_num):

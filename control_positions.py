@@ -15,6 +15,7 @@ class ControlPositions:
         :param (x_previous, y_previous): x and y render positions for previous button (int, int)
         :param (x_random, y_random): x and y render positions for random button (int, int)
         :param (x_reset, y_reset): x and y render positions for reset button (int, int)
+        :param (x_draw_mode, y_draw_mode): x and y render positions for draw mode button (int, int)
         """
         self.x_control_text, self.y_control_text = 0, 0
         self.x_play, self.y_play = 0, 0
@@ -23,6 +24,7 @@ class ControlPositions:
         self.x_previous, self.y_previous = 0, 0
         self.x_random, self.y_random = 0, 0
         self.x_reset, self.y_reset = 0, 0
+        self.x_draw_mode, self.y_draw_mode = 0, 0
 
     def set_control_text_pos(self):
         """
@@ -86,6 +88,15 @@ class ControlPositions:
         self.x_reset = GRID_WIDTH + CONTROL_PANEL_WIDTH // 2 - BUTTON_WIDTH // 2
         self.y_reset = self.y_random + BUTTON_HEIGHT + GAP_BETWEEN_BUTTONS
 
+    def set_draw_mode_button_pos(self):
+        """
+        set x and y positions for draw mode button
+        :return: None
+        """
+        self.set_reset_button_pos()
+        self.x_draw_mode = GRID_WIDTH + CONTROL_PANEL_WIDTH // 2 - BUTTON_WIDTH // 2
+        self.y_draw_mode = self.y_reset + BUTTON_HEIGHT + GAP_BETWEEN_BUTTONS
+
     def set_all_control_positions(self):
         """
         calls all of the above methods
@@ -98,3 +109,4 @@ class ControlPositions:
         self.set_previous_button_pos()
         self.set_random_button_pos()
         self.set_reset_button_pos()
+        self.set_draw_mode_button_pos()

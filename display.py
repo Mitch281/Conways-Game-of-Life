@@ -146,6 +146,14 @@ class Screen(ControlPositions):
                 return True
         return False
 
+    def cursor_on_draw_mode_button(self, cursor_position):
+        x_pos = cursor_position[0]
+        y_pos = cursor_position[1]
+        if self.x_draw_mode <= x_pos <= self.x_draw_mode + BUTTON_WIDTH:
+            if self.y_draw_mode <= y_pos <= self.y_draw_mode + BUTTON_HEIGHT:
+                return True
+        return False
+
     def highlight_control(self, cursor_position):
         """
         highlights the control_button with a green rectangle if the cursor hovers over it
@@ -170,6 +178,13 @@ class Screen(ControlPositions):
         elif self.cursor_on_reset_button(cursor_position):
             pygame.draw.rect(self.display, GREEN, (self.x_reset, self.y_reset, BUTTON_WIDTH, BUTTON_HEIGHT), 2)
 
+    def highlight_draw_mode_button(self):
+        """
+        highlights the draw mode button
+        :return: None
+        """
+        pygame.draw.rect(self.display, GREEN, (self.x_draw_mode, self.y_draw_mode, BUTTON_WIDTH, BUTTON_HEIGHT), 2)
+
     def render_controls_panel(self):
         """
         renders the control buttons onto the screen
@@ -182,6 +197,7 @@ class Screen(ControlPositions):
         self.display.blit(PREVIOUS_BUTTON, (self.x_previous, self.y_previous))
         self.display.blit(RANDOM_BUTTON, (self.x_random, self.y_random))
         self.display.blit(RESET_BUTTON, (self.x_reset, self.y_reset))
+        self.display.blit(DRAW_MODE_BUTTON, (self.x_draw_mode, self.y_draw_mode))
 
 
 screen = Screen()

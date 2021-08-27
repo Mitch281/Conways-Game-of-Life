@@ -14,9 +14,11 @@ class Flags:
         or cell when the mouse is being clicked to give the buttons a clicking animation (bool)
         :param self.num_times_click: counts the number of times the mouse button has not only been clicked
         (mouse button down), but released a clicked (mouse button up) (bool)
+        :param self.draw_mode_on: checks if the draw mode button is toggled or not (bool)
         """
         self.game_running = False
         self.only_want_next_step = False
         self.get_previous_step = False
         self.mouse_being_clicked = False
         self.num_times_click = 0
+        self.draw_mode_on = False
