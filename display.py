@@ -180,6 +180,14 @@ class Screen(ControlPositions):
         elif self.cursor_on_draw_mode_button(cursor_position):
             pygame.draw.rect(self.display, GREEN, (self.x_draw_mode, self.y_draw_mode, BUTTON_WIDTH, BUTTON_HEIGHT), 2)
 
+    def highlight_play_button(self):
+        pygame.draw.rect(self.display, GREEN, (
+        self.x_play, self.y_play, BUTTON_WIDTH, BUTTON_HEIGHT), 2)
+
+    def highlight_stop_button(self):
+        pygame.draw.rect(self.display, GREEN,
+                         (self.x_stop, self.y_stop, BUTTON_WIDTH, BUTTON_HEIGHT), 2)
+
     def highlight_draw_mode_button(self):
         """
         highlights the draw mode button

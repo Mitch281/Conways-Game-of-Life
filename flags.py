@@ -22,3 +22,4 @@ class Flags:
         self.mouse_being_clicked = False
         self.num_times_click = 0
         self.draw_mode_on = False
+        self.stop_button_pressed = False

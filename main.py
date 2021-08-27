@@ -32,18 +32,24 @@ def main():
                 if not screen.click_on_grid(click_position):
                     if screen.cursor_on_play_button(click_position):
                         flags.game_running = True
+                        flags.stop_button_pressed = False
                     elif screen.cursor_on_stop_button(click_position):
                         flags.game_running = False
+                        flags.stop_button_pressed = True
                     elif screen.cursor_on_next_button(click_position):
                         flags.game_running = True
                         flags.only_want_next_step = True
+                        flags.stop_button_pressed = False
                     elif screen.cursor_on_previous_button(click_position) and puzzle.step_count >= 1:
                             flags.get_previous_step = True
+                            flags.stop_button_pressed = False
                     elif screen.cursor_on_random_button(click_position) and not flags.game_running:
                         puzzle.reset_grid()
                         puzzle.generate_random_board()
+                        flags.stop_button_pressed = False
                     elif screen.cursor_on_reset_button(click_position) and not flags.game_running:
                         puzzle.reset_grid()
+                        flags.stop_button_pressed = False
                     elif screen.cursor_on_draw_mode_button(click_position):
                         if not flags.draw_mode_on:
                             flags.draw_mode_on = True
@@ -58,6 +64,12 @@ def main():
         if (keys_pressed[pygame.K_LCTRL] and mouse_pressed[0]) or (flags.draw_mode_on and mouse_pressed[0]):
             click_position = pygame.mouse.get_pos()
             puzzle.fill_grid(click_position)
+
+        if flags.game_running:
+            screen.highlight_play_button()
+
+        if flags.stop_button_pressed:
+            screen.highlight_stop_button()
 
         # Highlights draw mode button while draw mode is on.
         if flags.draw_mode_on:
