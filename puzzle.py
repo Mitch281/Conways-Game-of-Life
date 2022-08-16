@@ -6,6 +6,7 @@ class Puzzle:
     """
     Class that handles the logic of the puzzle
     """
+
     def __init__(self):
         """
         Initialise the object
@@ -83,9 +84,12 @@ class Puzzle:
 
             # Cell is in bottom right corner
             elif (row_num, col_num) == (NUM_ROWS - 1, NUM_COLUMNS - 1):
-                neighbour_values.append(self.grid[NUM_ROWS - 1][NUM_COLUMNS - 2])
-                neighbour_values.append(self.grid[NUM_ROWS - 2][NUM_COLUMNS - 2])
-                neighbour_values.append(self.grid[NUM_ROWS - 2][NUM_COLUMNS - 2])
+                neighbour_values.append(
+                    self.grid[NUM_ROWS - 1][NUM_COLUMNS - 2])
+                neighbour_values.append(
+                    self.grid[NUM_ROWS - 2][NUM_COLUMNS - 2])
+                neighbour_values.append(
+                    self.grid[NUM_ROWS - 2][NUM_COLUMNS - 2])
 
             # Cell is in bottom left corner
             elif (row_num, col_num) == (NUM_ROWS - 1, 0):
@@ -103,14 +107,18 @@ class Puzzle:
             # Cell on right boundary but not in a corner.
             elif 1 <= row_num <= NUM_ROWS - 2 and col_num == NUM_COLUMNS - 1:
                 for i in range(-1, 2):
-                    neighbour_values.append(self.grid[row_num + i][NUM_COLUMNS - 2])
-                neighbour_values.append(self.grid[row_num - 1][NUM_COLUMNS - 1])
-                neighbour_values.append(self.grid[row_num - 1][NUM_COLUMNS - 1])
+                    neighbour_values.append(
+                        self.grid[row_num + i][NUM_COLUMNS - 2])
+                neighbour_values.append(
+                    self.grid[row_num - 1][NUM_COLUMNS - 1])
+                neighbour_values.append(
+                    self.grid[row_num - 1][NUM_COLUMNS - 1])
 
             # Cell on bottom boundary but not in a corner.
             elif row_num == NUM_ROWS - 1 and 1 <= col_num <= NUM_COLUMNS - 2:
                 for i in range(-1, 2):
-                    neighbour_values.append(self.grid[NUM_ROWS - 2][col_num + i])
+                    neighbour_values.append(
+                        self.grid[NUM_ROWS - 2][col_num + i])
                 neighbour_values.append(self.grid[NUM_ROWS - 1][col_num - 1])
                 neighbour_values.append(self.grid[NUM_ROWS - 1][col_num + 1])
 
@@ -196,11 +204,15 @@ class Puzzle:
         generates a random board
         :return: None
         """
-        for row_num in range(NUM_ROWS):
-            num_alive_cells_per_row = random.randint(0, NUM_COLUMNS)
-            alive_cells_in_row = random.sample(range(0, NUM_COLUMNS), num_alive_cells_per_row)
-            for col_num in alive_cells_in_row:
+        num_cells = NUM_COLUMNS * NUM_ROWS
+        num_alive_cells = random.randint(1, num_cells)
+        current_num_alive_cells = 0
+        while current_num_alive_cells < num_alive_cells:
+            row_num = random.randint(0, NUM_COLUMNS - 1)
+            col_num = random.randint(0, NUM_ROWS - 1)
+            if self.grid[row_num][col_num] != 1:
                 self.grid[row_num][col_num] = 1
+                current_num_alive_cells += 1
 
     def reset_grid(self):
         """

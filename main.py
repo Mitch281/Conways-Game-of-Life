@@ -16,7 +16,8 @@ def main():
     running = True
     while running:
         screen.display.fill(BLACK, (0, 0, GRID_WIDTH, GRID_LENGTH))
-        screen.display.fill(ORANGE, (GRID_WIDTH, 0, CONTROL_PANEL_WIDTH, CONTROL_PANEL_HEIGHT))
+        screen.display.fill(
+            ORANGE, (GRID_WIDTH, 0, CONTROL_PANEL_WIDTH, CONTROL_PANEL_HEIGHT))
         screen.draw_lines()
         screen.render_alive_cells()
         screen.render_controls_panel()
@@ -41,8 +42,8 @@ def main():
                         flags.only_want_next_step = True
                         flags.stop_button_pressed = False
                     elif screen.cursor_on_previous_button(click_position) and puzzle.step_count >= 1:
-                            flags.get_previous_step = True
-                            flags.stop_button_pressed = False
+                        flags.get_previous_step = True
+                        flags.stop_button_pressed = False
                     elif screen.cursor_on_random_button(click_position) and not flags.game_running:
                         puzzle.reset_grid()
                         puzzle.generate_random_board()
